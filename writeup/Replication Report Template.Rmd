@@ -12,42 +12,68 @@ output:
 
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
-##Introduction
+## Introduction
 
 I chose this particular study due to my passion for health and performance psychology, as well as to gain a deeper understanding into the implications of physical activity on stress-related mental health concerns in college students. As a current collegiate student-athlete, I have experienced the postive effects that physical activity (PA) can have on underlying stress levels. I was drawn to this study because of its utilization of questionnaires that measure 'self perceived resilience' and 'trait anxiety'; both measures that I beleive to be signficant within the domain of mental health and performance. 
 
 The main question this study aimed to address is simple, yet profound: "Does PA improve an individual's stress resilience, in turn, providing protection against stress-related mental health problems?". In the study, there were 222 participants that were all undergraduates enrolled at a Southern, urban univeristy and taking at least one psychology course. Researchers surveyed participants on their physical activity level (GPAQ-2), self-perceived resilience (CD-RISC 10), and trait anxiety (STAI-T) to test whether trait anxiety moderated the association between PA and self-percieved resilience. The researchers then conducted a multiple hierarchical linear regression analysis for their hypothesis testing. A potential challenge may be getting enough participants if we choose to narrow our population to only undergraduate students. A second challenge may be replicating the hierarchical linear regression that was performed in the original study.  
 
 Repository: https://github.com/psych251/hegburg2014.git
+
 Original Paper: https://github.com/psych251/hegburg2014/tree/main/original_paper
 
-##Methods
+## Methods
 
-###Power Analysis
+### Power Analysis
 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+Using G*Power 3.1, I conducted a power analyis that provided me a sample size of 161 participants with 99% power. The categories I selected within the power analysis were (t-tests, correlation point biserial model, a priori compute required sample size given a, power, and effect size, one tail, effect size of 0.3, a err prob of 0.05, and power of 0.99). I feel 160 particpants is a realistic number to anticipate taking my survey, however, there were a lot of different power analyses that led to different sample size totals. I think I will show a TA a screen shot of my power analysis to make sure my sample size makes sense.
 
-###Planned Sample
+### Planned Sample
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+"Participation was restricted to those who self-identified as proficient in the English language. Participants were asked to report their age, sex, and racial identity". These were the only demographic criteria listed in the article and I do not plan on asking any more demograhpic questions other than age, sex, and racial identity to keep my replication study as similar as possible to the original. 
 
-###Materials
+### Materials
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+"Participants were 222 undergraduates enrolled at a Southern, urban university (see Table 1 for descriptive statistics). The sample's racial distribution was roughly consistent with that of the university student body and the local population, according to census data (U.S. Census Bureau, 2012). Participation was restricted to those who self-identified as proficient in the English language. Participants were recruited through an online research management system for students enrolled in psychology courses. They received detailed information about this IRB-approved study and about the voluntary nature of their participation. All data were collected using the Survey Monkey online questionnaire tool".
 
-###Procedure	
+For methods, there isn't much needed since this is a correlational study done through online surveys. In terms of methods, I anticipate my replication study looking very similar to this. There will most likely not be as many participants (n=100-150), however, I am planning on having similar racial and age distributions. Not all participants will be university students and my replication study will be conducted using prolific. 
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+### Procedure	
 
-###Analysis Plan
+The main procedure of this replication study will be creating the survey that my participants will take. In order to replicate the original study as closely as possible, I will use the same exact questionnaires that test the 3 main measures of interest: Physical Activity Level, Self-Percieved Resilience, and Trait Anxiety. 
 
-Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+Physical Activitiy Level:
+"The Global Physical Activity Questionnaire Version 2 (GPAQ-2; World Health Organization [WHO], 2001) was used to assess
+physical activity in a typical week across three contexts (i.e., activity at work, travel to and from places, recreational activities). The
+GPAQ-2 includes 16 self-report items that measure time spent engaged in 1) vigorous- and moderate-intensity activity at work and during recreation, 2) walking and/or biking for transportation for at least 10 min continuously, and 3) sedentary behavior. The GPAQ-2 has been shown to be valid and reliable, as well as appropriate for use in varied cultural contexts (WHO, 2012). Recent research shows acceptable evidence of test-retest reliability, concurrent validity, criterion validity consistent with other measures of PA, and suggest that the GPAQ version 2 is suitable as a measure for monitoring PA (Bull, Maslin, & Armstrong, 2009; Herrmann, Heumann, Der Ananian, & Ainsworth, 2013)."
 
-**Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
+Self Percieved Resilience: 
+"The Connor Davidson Resilience Scale 10 (CD-RISC 10; Campbell-Sills & Stein, 2007) was used to assess self-perceived
+resilience in day-to-day life. The CD-RISC 10 is a unidimensional 10-item self-report measure designed to quantify resilience,
+conceptualized as successful stress-coping ability. The measure yields an overall resilience score (0-40), with higher scores reflecting greater perceived resilience. The CDRISC 10 has been shown to have sound psychometric properties including reliability and validity across demographically diverse samples (Campbell-Sills & Stein, 2007; Coates, Phares, & Dedrick, 2013)."
 
-###Differences from Original Study
+Trait Anxiety: 
+"The State-Trait Anxiety Inventory- Form X (STAI-T; Spielberger, Gorsuch, & Lushene, 1970) was used to assess trait anxiety. The
+STAI-T is a 20-item self-report measure used to assess stable individual differences in anxiety proneness and scores reflect a general tendency to respond to the environment with anxiety (Spielberger, Gorsuch, Lushene, Vagg, & Jacobs, 1983).Item responses are summed to yield a total score ranging from 20 to 80, with higher scores indicating greater trait anxiety. The measure's author reported good test-retest reliability and inter-item consistency (Spielberger et al., 1970), which has since been replicated (Rule & Traver, 1983). The STAI-T has demonstrated good convergent and concurrent validity (Tilton, 2008), as well as convergent validity and strong psychometric properties across ethnic groups and gender (Novy, Nelson, Goodwin, & Rowzee, 1993)."
 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+
+### Analysis Plan
+
+Data Cleaning:
+"Prior to conducting analyses, data were inspected for errors, excessive missing cases, outliers, and normality of distribution in accordance with published approaches (Bulmer, 1979; Hoaglin & Iglewicz, 1987; Tabachnick & Fidell, 2007; WHO, 2001). Where needed, data were transformed to better approximate normality. The distribution of GPAQ PA was positively skewed (SkewnessGPAQ ¼ 1.63, SE ¼ .21); therefore, these data were square root transformed (SkewnessGPAQ_transformed ¼ .44, SE ¼ .21). All other variables met assumptions of regression analysis".
+
+Hypothesis Testing:
+"To test whether trait anxiety moderated the association between PA and self-perceived resilience, we conducted a multiple hierarchical linear regression analysis. First, all predictors were either dummy coded (gender, race) or converted to z-scores, and then centered to facilitate interpretation of the findings and to reduce collinearity. At Step 1 of the regression model, covariates–Gender, Age, Race–were regressed onto the outcome variable (total CD-RISC score, which indexed self-perceived resilience). Demographic variables were included as covariates based on results of preliminary analyses indicating significant associations with study variables. At Step two, mean-centered trait anxiety and square root transformed and centered PA METs were added to the model. Lastly, at Step three, the trait anxiety  PA interaction term was added to the model. To obtain this variable, the centered trait anxiety total was multiplied by the transformed and centered METs of physical activity."
+
+I plan on using a very similar method of statistical analysis as the one described in the original study. The offical title of the analysis is a "multiple hierarchial linear regression analysis". Along with the descriptions in the original paper, I plan on using this link - (https://data.library.virginia.edu/hierarchical-linear-regression/) - to assist in the data analysis. 
+
+The one key result in the model will be to "test whether trait anxiety moderated the association between PA and self-perceived resilience". Although there are other relationships that can be measured, this is the main measure the authors were looking into. 
+
+**multiple hierarchical linear regression analysis**
+
+### Differences from Original Study
+
+In terms of the survey questions and data analysis, I intend for these to be done as closely related to the orignal study as possible. The only difference I forsee happening are the amount and diveristy of our participants (in terms of age, race, SES, etc). I am deciding whether it would be best to recruit Stanford students in Psych 1 to take my survey, or gather all participants using Prolific. Taking Psych 1 students may be the closest I can get to the original study, however, I think I could get more participants using Prolific. 
 
 ### Methods Addendum (Post Data Collection)
 
@@ -60,7 +86,7 @@ You can comment this section out prior to final report with data collection.
   Any differences from what was described as the original plan, or “none”.
 
 
-##Results
+## Results
 
 
 ### Data preparation
@@ -72,12 +98,94 @@ Data preparation following the analysis plan.
 
 ####Load Relevant Libraries and Functions
 
+library(tidyverse) # for data munging
+library(knitr) # for kable table formating
+library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
+library(readxl) # import excel files
+library(ggplot2) # ggplot2 library
+
 ####Import data
 
-#### Data exclusion / filtering
+raw_data <- read_excel("~/desktop/Physical Activity & Stress Resilience.xlsx")
+view(raw_data)
 
 #### Prepare data for analysis - create columns etc.
 ```
+
+### Cleaning Data
+
+```{r}
+# present all the column names 
+colnames(raw_data)
+```
+
+
+```{r}
+# attempt to get rid of miscellaneous headers
+clean_data = data_table %>%
+  select(-StartDate, -EndDate, -Status, -IPAddress, -RecipientLastName, -RecipientFirstName, -RecipientEmail, -ExternalReference, -LocationLatitude,   -LocationLongitude, -DistributionChannel, -UserLanguage)
+
+view(clean_data)
+```
+
+
+```{r}
+# scoring of the CD-RISC-10
+RISC_data = clean_data %>%
+  select(RISC_q_1, RISC_q_2, RISC_q_3, RISC_q_4, RISC_q_5, RISC_q_6, RISC_q_7, RISC_q_8, RISC_q_9, RISC_q_10) %>%
+  mutate_at(vars(1:10), ~as.numeric(recode(.,
+    "Not true at all" = "0", "Rarely true" = "1", "Sometimes true" = "2", "Often true" = "3", "True nearly all the time" = "4"))) %>%
+  mutate(Total_Score = rowSums(.))
+  
+view(RISC_data)
+```
+
+```{r}
+# reverse scoring of the State-Trait Anxiety Inventory
+
+STAIT_data <- clean_data %>% 
+ mutate(`STAIT_q_1` = 4 - `STAIT_q_1`,
+        `STAIT_q_3` = 4 - `STAIT_q_3`,
+        `STAIT_q_6` = 4 - `STAIT_q_6`,
+        `STAIT_q_7` = 4 - `STAIT_q_7`, 
+        `STAIT_q_7` = 4 - `STAIT_q_7`,
+        `STAIT_q_10` = 4 - `STAIT_q_10`,
+        `STAIT_q_13` = 4 - `STAIT_q_13`,
+        `STAIT_q_14` = 4 - `STAIT_q_14`,
+        `STAIT_q_16` = 4 - `STAIT_q_16`,
+        `STAIT_q_19` = 4 - `STAIT_q_19`,)
+
+STAIT_data
+```
+
+```{r}
+# scoring of the State-Trait Anxiety Inventory
+
+STAIT_data = clean_data %>%
+  select(STAIT_q_1, STAIT_q_2, STAIT_q_3, STAIT_q_4, STAIT_q_5, STAIT_q_6, STAIT_q_7, STAIT_q_8, STAIT_q_9, STAIT_q_10, STAIT_q_11, STAIT_q_12, STAIT_q_13, STAIT_q_14, STAIT_q_15, STAIT_q_16, STAIT_q_17, STAIT_q_18, STAIT_q_19, STAIT_q_20) %>%
+  mutate_at(vars(1:20), ~as.numeric(recode(.,
+    "Almost Never" = "1", "Sometimes" = "2", "Often" = "3", "Almost Always" = "4"))) %>%
+  mutate(Total_Score = rowSums(.))
+  
+view(STAIT_data)
+```
+
+### Data exclusion / filtering
+
+```{r}
+#### Data exclusion / filtering
+
+# m1 <- lm(resilience ~ gender + age + race, data=d) # Model 1
+# m2 <- lm(resilience ~ anxiety + PA + gender + age + race, data=) # Model 2
+# m3 <- lm(resilience ~ anxiety * PA + gender + age + race, data=d) # Model 3
+
+# anova1 <- anova(m0)  # to obtain Total SS
+# anova2 <- anova(m1, m2, m3)  # model comparison
+```
+
+
+FINAL THOUGHTS -> I have started scoring for the different questionnaires, and completed the CD-RISC-10 scoring above. I am planning on completing the other two questionnaires very soon. My plan is to be in touch with the TA's throughout this next week as I work through what the linear regression will look like. I do feel like my qualtrics survey is ready to be uploaded to Prolific and hope to be given permission to start that process as soon as possible!
+
 
 ### Confirmatory analysis
 
@@ -85,7 +193,7 @@ The analyses as specified in the analysis plan.
 
 *Side-by-side graph with original graph is ideal here*
 
-###Exploratory analyses
+### Exploratory analyses
 
 Any follow-up analyses desired (not required).  
 
