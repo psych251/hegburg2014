@@ -14,7 +14,7 @@ output:
 
 ## Introduction
 
-I chose this particular study due to my passion for health and performance psychology, as well as to gain a deeper understanding into the implications of physical activity on stress-related mental health concerns in college students. As a current collegiate student-athlete, I have experienced the postive effects that physical activity (PA) can have on underlying stress levels. I was drawn to this study because of its utilization of questionnaires that measure 'self perceived resilience' and 'trait anxiety'; both measures that I beleive to be signficant within the domain of mental health and performance. 
+I chose this particular study due to my passion for health and performance psychology, as well as to gain a deeper understanding into the implications of physical activity on stress-related mental health concerns in college students. As a current collegiate student-athlete, I have experienced the postive effects that physical activity (PA) can have on underlying stress levels. I was drawn to this study because of its utilization of questionnaires that measure 'self perceived resilience' and 'trait anxiety'; both measures that I beleive to be significant within the domain of mental health and performance. 
 
 The main question this study aimed to address is simple, yet profound: "Does PA improve an individual's stress resilience, in turn, providing protection against stress-related mental health problems?". In the study, there were 222 participants that were all undergraduates enrolled at a Southern, urban univeristy and taking at least one psychology course. Researchers surveyed participants on their physical activity level (GPAQ-2), self-perceived resilience (CD-RISC 10), and trait anxiety (STAI-T) to test whether trait anxiety moderated the association between PA and self-percieved resilience. The researchers then conducted a multiple hierarchical linear regression analysis for their hypothesis testing. A potential challenge may be getting enough participants if we choose to narrow our population to only undergraduate students. A second challenge may be replicating the hierarchical linear regression that was performed in the original study.  
 
@@ -93,39 +93,77 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 	
+	
 ```{r include=F}
 ###Data Preparation
 
 ####Load Relevant Libraries and Functions
 
 library(tidyverse) # for data munging
-library(knitr) # for kable table formating
+library(knitr) # for table formatting
 library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
 library(readxl) # import excel files
 library(ggplot2) # ggplot2 library
+library(lubridate)
 
 ####Import data
 
 raw_data <- read_excel("~/desktop/Physical Activity & Stress Resilience.xlsx")
-view(raw_data)
+
 
 #### Prepare data for analysis - create columns etc.
 ```
 
+
 ### Cleaning Data
+
 
 ```{r}
 # present all the column names 
 colnames(raw_data)
 ```
 
-
 ```{r}
 # attempt to get rid of miscellaneous headers
-clean_data = data_table %>%
-  select(-StartDate, -EndDate, -Status, -IPAddress, -RecipientLastName, -RecipientFirstName, -RecipientEmail, -ExternalReference, -LocationLatitude,   -LocationLongitude, -DistributionChannel, -UserLanguage)
+clean_data = raw_data %>%
+  select(-StartDate, -EndDate, -Status, -IPAddress, -RecipientLastName, -RecipientFirstName, -RecipientEmail, -ExternalReference, -LocationLatitude,   -LocationLongitude, -DistributionChannel, -UserLanguage, -workerId, -assignmentId, -hitId, -ResponseId, -Prolific_ID) %>%
+  mutate(Participant = row_number()) %>%
+  relocate(Participant, demo_age, demo_gender, demo_race)
 
 view(clean_data)
+```
+
+
+### Data exclusion / filtering
+
+
+```{r}
+# scoring of the GPAQ-2
+GPAQ2_data = clean_data %>%
+  select(starts_with("GPAQ2")) %>%
+  mutate(across(c(GPAQ2_P2a, GPAQ2_P2b, GPAQ2_P4a, GPAQ2_P4b, GPAQ2_P6a,GPAQ2_P6b, GPAQ2_P8a, GPAQ2_P8b, GPAQ2_P10a, GPAQ2_P10b, GPAQ2_P11),               ~ifelse(str_detect(.,":"),as.numeric(hm(.))/60, as.numeric(.))))
+
+GPAQ2_data <- replace(GPAQ2_data, is.na(GPAQ2_data), 0)              # replace NA values for 0
+GPAQ2_data <- GPAQ2_data[-1,]                                        # get rid of first row containing survey questions
+
+vigorous_work <- GPAQ2_data$GPAQ2_P2a * GPAQ2_data$GPAQ2_P2b * 6     # new variables to calculate MET levels 
+moderate_work <- GPAQ2_data$GPAQ2_P4a * GPAQ2_data$GPAQ2_P4b * 3
+vigorous_sport <- GPAQ2_data$GPAQ2_P8a * GPAQ2_data$GPAQ2_P8b * 9
+moderate_sport <- GPAQ2_data$GPAQ2_P10a * GPAQ2_data$GPAQ2_P10b * 4.5
+
+GPAQ2_data = GPAQ2_data %>%
+  mutate(Total_MET = vigorous_work + moderate_work + vigorous_sport + moderate_sport)
+  
+head(GPAQ2_data)
+```
+
+```{r}
+# histogram for GPAQ-2 responses
+ggplot(GPAQ2_data, aes(x = GPAQ2_Total_MET)) + 
+  geom_histogram(bins = 15, color = "black", fill = "azure") +
+  labs(title = "GPAQ2 Physical Acitivity Level",
+       x = "Physicial Activity Score",
+       y = "Frequency")
 ```
 
 
@@ -136,60 +174,88 @@ RISC_data = clean_data %>%
   mutate_at(vars(1:10), ~as.numeric(recode(.,
     "Not true at all" = "0", "Rarely true" = "1", "Sometimes true" = "2", "Often true" = "3", "True nearly all the time" = "4"))) %>%
   mutate(Total_Score = rowSums(.))
+  na.omit(RISC_data)
   
-view(RISC_data)
+RISC_data <- RISC_data[-1,]     # get rid of first row containing survey questions
+
+head(RISC_data)
 ```
 
 ```{r}
-# reverse scoring of the State-Trait Anxiety Inventory
-
-STAIT_data <- clean_data %>% 
- mutate(`STAIT_q_1` = 4 - `STAIT_q_1`,
-        `STAIT_q_3` = 4 - `STAIT_q_3`,
-        `STAIT_q_6` = 4 - `STAIT_q_6`,
-        `STAIT_q_7` = 4 - `STAIT_q_7`, 
-        `STAIT_q_7` = 4 - `STAIT_q_7`,
-        `STAIT_q_10` = 4 - `STAIT_q_10`,
-        `STAIT_q_13` = 4 - `STAIT_q_13`,
-        `STAIT_q_14` = 4 - `STAIT_q_14`,
-        `STAIT_q_16` = 4 - `STAIT_q_16`,
-        `STAIT_q_19` = 4 - `STAIT_q_19`,)
-
-STAIT_data
+# histogram for CD-RISK_-10 responses
+ggplot(RISC_data, aes(x = Total_Score)) + 
+  geom_histogram(bins = 20, color = "black", fill = "cornflowerblue") + 
+  labs(title = "CD RISK 10 Questionnaire",
+       x = "Resiliency Score",
+       y = "Frequency")
 ```
 
 ```{r}
 # scoring of the State-Trait Anxiety Inventory
-
 STAIT_data = clean_data %>%
-  select(STAIT_q_1, STAIT_q_2, STAIT_q_3, STAIT_q_4, STAIT_q_5, STAIT_q_6, STAIT_q_7, STAIT_q_8, STAIT_q_9, STAIT_q_10, STAIT_q_11, STAIT_q_12, STAIT_q_13, STAIT_q_14, STAIT_q_15, STAIT_q_16, STAIT_q_17, STAIT_q_18, STAIT_q_19, STAIT_q_20) %>%
+  select(starts_with("STAIT")) %>%
   mutate_at(vars(1:20), ~as.numeric(recode(.,
     "Almost Never" = "1", "Sometimes" = "2", "Often" = "3", "Almost Always" = "4"))) %>%
+  mutate(`STAIT_q_1` = 4 - `STAIT_q_1`,
+        `STAIT_q_3` = 4 - `STAIT_q_3`,
+        `STAIT_q_6` = 4 - `STAIT_q_6`,
+        `STAIT_q_7` = 4 - `STAIT_q_7`, 
+        `STAIT_q_10` = 4 - `STAIT_q_10`,
+        `STAIT_q_13` = 4 - `STAIT_q_13`,
+        `STAIT_q_14` = 4 - `STAIT_q_14`,
+        `STAIT_q_16` = 4 - `STAIT_q_16`,
+        `STAIT_q_19` = 4 - `STAIT_q_19`,) %>%
   mutate(Total_Score = rowSums(.))
-  
-view(STAIT_data)
-```
 
-### Data exclusion / filtering
+STAIT_data <- STAIT_data[-1,]    # get rid of first row containing survey questions
+  
+head(STAIT_data)
+```
 
 ```{r}
-#### Data exclusion / filtering
-
-# m1 <- lm(resilience ~ gender + age + race, data=d) # Model 1
-# m2 <- lm(resilience ~ anxiety + PA + gender + age + race, data=) # Model 2
-# m3 <- lm(resilience ~ anxiety * PA + gender + age + race, data=d) # Model 3
-
-# anova1 <- anova(m0)  # to obtain Total SS
-# anova2 <- anova(m1, m2, m3)  # model comparison
+# histogram for State-Trait Anxiety Inventory responses
+ggplot(STAIT_data, aes(x = Total_Score)) + 
+  geom_histogram(bins = 20, color = "black", fill = "lightpink3") + 
+  labs(title = "State Trait Anxiety Inventory",
+       x = "Trait Anxiety Score",
+       y = "Frequency")
 ```
 
+```{r}
+# creating a new data frame that holds all key measures to be analyzed in the linear regression
+RISK_Total_Score <- RISC_data$Total_Score
+STAIT_Total_Score <- STAIT_data$Total_Score 
+GPAQ2_Total_MET <- GPAQ2_data$Total_MET
+Age <- as.numeric(clean_data$demo_age)
+Gender <- clean_data$demo_gender
+Race <- clean_data$demo_race
+
+key_measures <- cbind(RISK_Total_Score, STAIT_Total_Score, GPAQ2_Total_MET, Age, Gender, Race)
+
+key_measures <- key_measures[-1,] %>% as_tibble()   # get rid of first row containing survey questions
+
+view(key_measures)
+```
 
 FINAL THOUGHTS -> I have started scoring for the different questionnaires, and completed the CD-RISC-10 scoring above. I am planning on completing the other two questionnaires very soon. My plan is to be in touch with the TA's throughout this next week as I work through what the linear regression will look like. I do feel like my qualtrics survey is ready to be uploaded to Prolific and hope to be given permission to start that process as soon as possible!
 
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+The analyses as specified in the analysis plan.
+
+```{r}
+
+m1 <- lm(RISK_Total_Score ~ Gender + Age + Race, data = key_measures)                                           # Model 1
+m2 <- lm(RISK_Total_Score ~ STAIT_Total_Score + GPAQ2_Total_MET + Gender + Age + Race, data = key_measures)     # Model 2
+m3 <- lm(RISK_Total_Score ~ STAIT_Total_Score * GPAQ2_Total_MET + Gender + Age + Race, data = key_measures)     # Model 3
+
+# anova1 <- anova(m0)  # to obtain Total SS
+anova2 <- anova(m1, m2, m3)  # model comparison
+
+summary(m1)
+```
+
 
 *Side-by-side graph with original graph is ideal here*
 
